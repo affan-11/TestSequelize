@@ -10,7 +10,7 @@ const Tv = sequelize.define("Tv", {
     actor: {
         type: DataTypes.STRING,
         defaultValue: "Not specified",
-    }
+    },
 });
 
 module.exports = Tv; 

@@ -2,11 +2,16 @@ const yargs = require("yargs");
 const { sequelize } = require("./db/connection");
 const { addMovie, listMovies, updateMovie, deleteMovie } = require("./movie/functions");
 const { addTV, listTv, updateTv, deleteTv, addTv } = require("./tv/functions");
+const Movie = require("./movie/table");
+const Director = require("./director/table");
 
 const app = async (yargsObj) => {
     try {
         await sequelize.sync();
-
+        Movie.hasOne(Director, {
+            foreignKey: "directorId"
+        });
+        Director.belongsTo(Movie);
         if (yargsObj.movie) {
         if (yargsObj.add) {
             //take movie key value pairs from yargsObj, send them to an add function and return movie
